@@ -1,0 +1,424 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Tutoring</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            color: #667eea;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .hero h2 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 19px;
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto 60px;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+            margin-top: 12px;
+        }
+
+        .options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+        }
+
+        .option input {
+            display: none;
+        }
+
+        .option:has(input:checked) {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        #otherBox {
+            display: none;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .day {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 13px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .day input {
+            display: none;
+        }
+
+        .day:has(input:checked) {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5568d8;
+        }
+
+        #success {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f7e7;
+            color: #277a27;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h2 {
+                font-size: 34px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Your Tutoring</h1>
+</header>
+
+<section class="hero">
+    <h2>Learn. Improve. Succeed.</h2>
+    <p>Tell us a little about what you're looking for.</p>
+</section>
+
+<div class="card">
+
+    <h2>Student Information</h2>
+
+    <form id="tutoringForm">
+
+        <!-- NAME -->
+        <div class="question">
+            <label class="question-title">1. What is your name?</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <!-- GRADE -->
+        <div class="question">
+            <label class="question-title">2. What grade are you in?</label>
+
+            <select id="grade" required>
+                <option value="">Select your grade</option>
+                <option>Grade 1</option>
+                <option>Grade 2</option>
+                <option>Grade 3</option>
+                <option>Grade 4</option>
+                <option>Grade 5</option>
+                <option>Grade 6</option>
+                <option>Grade 7</option>
+                <option>Grade 8</option>
+                <option>Grade 9</option>
+                <option>Grade 10</option>
+                <option>Grade 11</option>
+                <option>Grade 12</option>
+            </select>
+        </div>
+
+        <!-- LESSON TYPE -->
+        <div class="question">
+            <span class="question-title">
+                3. How would you like your tutoring?
+            </span>
+
+            <div class="options">
+
+                <label class="option">
+                    <input type="radio" name="lessonType" value="Online" required>
+                    💻 Online
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="lessonType" value="In person">
+                    👥 In person
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="lessonType" value="Other" id="otherOption">
+                    ✏️ Other
+                </label>
+
+            </div>
+
+            <div id="otherBox">
+                <textarea
+                    id="otherText"
+                    placeholder="Please explain what you would prefer..."
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- SUBJECT -->
+        <div class="question">
+            <label class="question-title">
+                4. Which subject would you like tutoring for?
+            </label>
+
+            <input
+                type="text"
+                id="subject"
+                placeholder="e.g. Maths, English, Science..."
+                required
+            >
+        </div>
+
+        <!-- DAYS -->
+        <div class="question">
+            <span class="question-title">
+                5. Which days are you available?
+            </span>
+
+            <p style="margin-bottom: 12px; color: #666;">
+                Select all the days that you're free.
+            </p>
+
+            <div class="days">
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Monday">
+                    Monday
+                </label>
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Tuesday">
+                    Tuesday
+                </label>
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Wednesday">
+                    Wednesday
+                </label>
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Thursday">
+                    Thursday
+                </label>
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Friday">
+                    Friday
+                </label>
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Saturday">
+                    Saturday
+                </label>
+
+                <label class="day">
+                    <input type="checkbox" name="days" value="Sunday">
+                    Sunday
+                </label>
+
+            </div>
+        </div>
+
+        <button type="submit">Submit Request →</button>
+
+        <div id="success"></div>
+
+    </form>
+
+</div>
+
+<footer>
+    <p>© 2026 Your Tutoring</p>
+</footer>
+
+<script>
+
+    // Show/hide the "Other" text box
+    const otherOption = document.getElementById("otherOption");
+    const otherBox = document.getElementById("otherBox");
+
+    document.querySelectorAll('input[name="lessonType"]').forEach(option => {
+
+        option.addEventListener("change", function() {
+
+            if (otherOption.checked) {
+                otherBox.style.display = "block";
+                document.getElementById("otherText").required = true;
+            } else {
+                otherBox.style.display = "none";
+                document.getElementById("otherText").required = false;
+            }
+
+        });
+
+    });
+
+
+    // Form submission
+    document.getElementById("tutoringForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const grade = document.getElementById("grade").value;
+        const subject = document.getElementById("subject").value;
+
+        const lessonType =
+            document.querySelector('input[name="lessonType"]:checked').value;
+
+        const selectedDays =
+            Array.from(document.querySelectorAll('input[name="days"]:checked'))
+            .map(day => day.value);
+
+        // Make sure at least one day is selected
+        if (selectedDays.length === 0) {
+            alert("Please select at least one day that you are available.");
+            return;
+        }
+
+        let lessonText = lessonType;
+
+        if (lessonType === "Other") {
+            lessonText = document.getElementById("otherText").value;
+        }
+
+        const success = document.getElementById("success");
+
+        success.style.display = "block";
+
+        success.innerHTML = `
+            <strong>Thanks, ${name}!</strong><br><br>
+            Grade: ${grade}<br>
+            Subject: ${subject}<br>
+            Tutoring: ${lessonText}<br>
+            Available: ${selectedDays.join(", ")}
+        `;
+
+    });
+
+</script>
+
+</body>
+</html>
+```
